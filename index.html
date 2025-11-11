@@ -1,137 +1,165 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NewsForMe - 国际·国内·产业资讯</title>
-  <style>
-    body {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      background-color: #f5f7fb;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background-color: #004aad;
-      color: white;
-      text-align: center;
-      padding: 1rem 0;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin: 2rem;
-    }
-    .column {
-      flex: 1;
-      min-width: 300px;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin: 0.5rem;
-      padding: 1rem;
-    }
-    .column h2 {
-      color: #004aad;
-      border-bottom: 2px solid #e6e9f2;
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .news-item {
-      margin-bottom: 0.75rem;
-      font-size: 0.95rem;
-    }
-    .news-item a {
-      text-decoration: none;
-      color: #333;
-    }
-    .news-item a:hover {
-      text-decoration: underline;
-      color: #004aad;
-    }
-    .chart {
-      width: 100%;
-      height: 300px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NewsForMe - 国际·国内·产业资讯</title>
+<style>
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  color: #333;
+}
+header {
+  background-color: #1a73e8;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 20px auto;
+  gap: 20px;
+}
+.column {
+  flex: 1;
+  min-width: 350px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.column h2 {
+  border-bottom: 2px solid #1a73e8;
+  padding-bottom: 5px;
+}
+.news-item { margin-bottom: 10px; }
+.news-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+.news-item a:hover { color: #1a73e8; }
+.chart-container {
+  width: 100%;
+  height: 300px;
+}
+footer {
+  text-align: center;
+  background-color: #1a73e8;
+  color: white;
+  padding: 15px;
+  margin-top: 20px;
+}
+</style>
 </head>
 <body>
-  <header>NewsForMe | 国际 · 国内 · 产业 要闻</header>
 
-  <div class="container">
-    <div class="column" id="international">
-      <h2>🌍 国际要闻</h2>
-      <div class="news-item">加载中...</div>
-    </div>
+<header>NewsForMe｜国际 · 国内 · 产业 要闻</header>
 
-    <div class="column" id="china">
-      <h2>🇨🇳 国内要闻</h2>
-      <div class="news-item">加载中...</div>
-    </div>
-
-    <div class="column" id="industry">
-      <h2>🏭 产业动态</h2>
-      <div class="news-item">加载中...</div>
-    </div>
+<div class="container">
+  <div class="column" id="international">
+    <h2>🌍 国际新闻</h2>
+    <div id="internationalNews"></div>
   </div>
-
-  <div class="column" style="margin:2rem;">
-    <h2>📈 工业大宗商品价格走势</h2>
-    <canvas id="priceChart" class="chart"></canvas>
+  <div class="column" id="china">
+    <h2>🇨🇳 国内新闻</h2>
+    <div id="chinaNews"></div>
   </div>
+  <div class="column" id="industry">
+    <h2>🏭 产业新闻</h2>
+    <div id="industryNews"></div>
+  </div>
+</div>
 
-  <!-- ✅ 引入 Firebase 浏览器 SDK（CDN 版本） -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+<div class="column" style="max-width:1200px;margin:20px auto;">
+  <h2>📈 工业大宗商品价格走势</h2>
+  <canvas id="commodityChart" class="chart-container"></canvas>
+</div>
 
-  <script>
-    // ✅ 使用你提供的 Firebase 信息（无需 npm）
-    const firebaseConfig = {
-      apiKey: "AIzaSyBHWVtgAIQzi7gvJPEVVkqD9SV87jj4jrM",
-      authDomain: "newsforme-2d943.firebaseapp.com",
-      databaseURL: "https://newsforme-2d943-default-rtdb.firebaseio.com/",
-      projectId: "newsforme-2d943",
-      storageBucket: "newsforme-2d943.firebasestorage.app",
-      messagingSenderId: "379068097235",
-      appId: "1:379068097235:web:ccca3bc191c7d9fa1aaa26",
-      measurementId: "G-PGTVE7MMBP"
-    };
+<footer>&copy; 2025 NewsForMe</footer>
 
-    // 初始化 Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+<!-- ✅ 使用 Compat SDK 版本（非模块化，可直接在浏览器使用） -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    console.log("✅ Firebase 初始化成功:", app.name);
-  </script>
+<script>
+// =================== Firebase 配置 ===================
+const firebaseConfig = {
+  apiKey: "AIzaSyBHWVtgAIQzi7gvJPEVVkqD9SV87jj4jrM",
+  authDomain: "newsforme-2d943.firebaseapp.com",
+  databaseURL: "https://newsforme-2d943-default-rtdb.firebaseio.com/",
+  projectId: "newsforme-2d943",
+  storageBucket: "newsforme-2d943.firebasestorage.app",
+  messagingSenderId: "379068097235",
+  appId: "1:379068097235:web:ccca3bc191c7d9fa1aaa26",
+  measurementId: "G-PGTVE7MMBP"
+};
 
-  <!-- 图表功能 -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById('priceChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['1月','2月','3月','4月','5月','6月','7月'],
-        datasets: [{
-          label: '大宗商品价格指数',
-          data: [103, 104, 101, 105, 107, 106, 109],
-          borderWidth: 2,
-          borderColor: '#004aad',
-          fill: false
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: true } },
-        scales: {
-          y: { beginAtZero: false }
-        }
-      }
-    });
-  </script>
+// 初始化 Firebase（兼容版）
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+console.log("✅ Firebase 初始化成功！");
+
+// =================== 测试新闻数据 ===================
+const testData = {
+  international: [
+    { title: "CNN: 全球热点追踪", summary: "最新国际局势综述。", link: "https://cnn.com" },
+    { title: "BBC: 今日头条", summary: "BBC 国际焦点新闻。", link: "https://bbc.com" }
+  ],
+  china: [
+    { title: "新华社: 政策动态", summary: "中央重要政策新闻。", link: "https://www.xinhuanet.com" },
+    { title: "中国政府网: 要闻速览", summary: "国务院最新信息。", link: "https://www.gov.cn" }
+  ],
+  industry: [
+    { title: "工信部: 行业发展", summary: "制造业新政发布。", link: "https://www.miit.gov.cn" },
+    { title: "江西省工信厅: 区域动态", summary: "地方产业政策解读。", link: "https://jxgxt.jiangxi.gov.cn" }
+  ]
+};
+
+// =================== 加载新闻函数 ===================
+function loadNews(containerId, data) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  data.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "news-item";
+    div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a><p>${item.summary}</p>`;
+    container.appendChild(div);
+  });
+}
+
+loadNews("internationalNews", testData.international);
+loadNews("chinaNews", testData.china);
+loadNews("industryNews", testData.industry);
+
+// =================== Chart.js 图表 ===================
+const ctx = document.getElementById('commodityChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['1月','2月','3月','4月','5月','6月'],
+    datasets: [{
+      label: '钢材价格指数',
+      data: [100, 120, 110, 130, 125, 140],
+      borderColor: 'rgba(26,115,232,1)',
+      backgroundColor: 'rgba(26,115,232,0.2)',
+      fill: true,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false
+  }
+});
+</script>
+
 </body>
 </html>
