@@ -74,7 +74,7 @@ const firebaseConfig = {
   authDomain: "newsforme-2d943.firebaseapp.com", // ← 在这里填你的authDomain
   databaseURL: "https://newsforme-2d943-default-rtdb.firebaseio.com/", // ← 在这里填你的databaseURL
   projectId: "newsforme-2d943",            // ← 在这里填你的projectId
-  storageBucket: "newsforme-2d943.firebasestorage.app", // ← 在这里填你的storageBucket
+  storageBucket: "newsforme-2d943.firebasestorage.com", // ← 在这里填你的storageBucket
   messagingSenderId: "379068097235", // ← 在这里填你的messagingSenderId
   appId: "1:379068097235:web:ccca3bc191c7d9fa1aaa26"                  // ← 在这里填你的appId
 };
