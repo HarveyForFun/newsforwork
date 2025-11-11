@@ -5,17 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NewsForMe 资讯门户</title>
 <style>
-body { font-family: "Microsoft YaHei", sans-serif; background-color: #f5f7fa; margin:0; color:#333; }
-header { background-color:#1a73e8; color:white; text-align:center; padding:20px 0; font-size:28px; font-weight:bold; letter-spacing:2px;}
-button { display:block; margin:10px auto; padding:10px 20px; font-size:14px; background:#1a73e8; color:white; border:none; border-radius:5px; cursor:pointer; }
+body { font-family:"Microsoft YaHei",sans-serif; margin:0; background:#f5f7fa; color:#333; }
+header { background:#1a73e8; color:#fff; text-align:center; padding:20px 0; font-size:28px; font-weight:bold; }
+button { display:block; margin:10px auto; padding:10px 20px; font-size:14px; background:#1a73e8; color:#fff; border:none; border-radius:5px; cursor:pointer; }
 button:hover { background:#155ab6; }
 .layout { display:flex; max-width:1200px; margin:20px auto; gap:20px; }
-.left, .right { background:white; border-radius:12px; box-shadow:0 2px 5px rgba(0,0,0,0.1); padding:20px;}
+.left, .right { background:#fff; border-radius:12px; box-shadow:0 2px 5px rgba(0,0,0,0.1); padding:20px; }
 .left { flex:3; }
 .right { flex:2; }
 h2 { border-left:5px solid #1a73e8; padding-left:10px; color:#1a73e8; margin-top:0; }
-ul { list-style:none; padding-left:0; }
-li { margin:6px 0; }
 a { text-decoration:none; color:#333; }
 a:hover { color:#1a73e8; }
 table { width:100%; border-collapse:collapse; margin-top:10px; }
@@ -44,9 +42,7 @@ footer { text-align:center; margin:20px 0; color:#666; }
 
     <h2>📊 工业大宗商品价格（近6月及同比增长）</h2>
     <table>
-      <tr>
-        <th>品种</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>同比增长(%)</th>
-      </tr>
+      <tr><th>品种</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>同比增长(%)</th></tr>
       <tr><td>钢材</td><td>520</td><td>530</td><td>540</td><td>550</td><td>560</td><td>575</td><td>+4.5</td></tr>
       <tr><td>铜</td><td>8600</td><td>8700</td><td>8800</td><td>8900</td><td>9050</td><td>9150</td><td>+3.8</td></tr>
       <tr><td>铝</td><td>2200</td><td>2250</td><td>2300</td><td>2350</td><td>2380</td><td>2400</td><td>+2.7</td></tr>
@@ -64,74 +60,70 @@ footer { text-align:center; margin:20px 0; color:#666; }
 <footer>© 2025 NewsForMe. 版权所有</footer>
 
 <script>
-async function fetchRSSJson(rssUrl) {
-  const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-  const res = await fetch(api);
-  const data = await res.json();
-  return data.items.slice(0,3); // 最新3条
+// 通用函数：通过 rss2json.com 抓取 RSS 并返回前 3 条
+async function fetchRSSJson(rssUrl){
+  try{
+    const api=`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+    const res=await fetch(api);
+    const data=await res.json();
+    return data.items ? data.items.slice(0,3) : [];
+  }catch(e){ console.log('抓取失败:',e); return []; }
 }
 
-function renderNews(containerId, items) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = '';
-  items.forEach(item => {
-    const div = document.createElement('div');
-    div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>
-                     <span style="color:#999;font-size:12px"> (${item.pubDate ? new Date(item.pubDate).toLocaleDateString() : ''})</span>
-                     <p style="color:#666;font-size:13px">${item.description || item.contentSnippet || ''}</p>`;
+// 渲染新闻到容器
+function renderNews(containerId, items){
+  const container=document.getElementById(containerId);
+  container.innerHTML='';
+  items.forEach(item=>{
+    const div=document.createElement('div');
+    div.innerHTML=`<a href="${item.link}" target="_blank">${item.title}</a>
+                   <span style="color:#999;font-size:12px"> (${item.pubDate?new Date(item.pubDate).toLocaleDateString():''})</span>
+                   <p style="color:#666;font-size:13px">${item.description||item.contentSnippet||''}</p>`;
     container.appendChild(div);
   });
 }
 
-async function loadAllNews() {
+// 加载所有新闻
+async function loadAllNews(){
   // 国际新闻
-  const intlRSS = [
+  const intlRSS=[
     "https://rss.cnn.com/rss/cnn_topstories.rss",
     "http://feeds.bbci.co.uk/news/rss.xml",
     "https://www.economist.com/sections/international/rss.xml"
   ];
-  let intlNews = [];
-  for(const url of intlRSS) {
-    try { intlNews = intlNews.concat(await fetchRSSJson(url)); } 
-    catch(e){ console.log('抓取失败:', e); }
-  }
+  let intlNews=[];
+  for(const url of intlRSS) intlNews=intlNews.concat(await fetchRSSJson(url));
   renderNews('internationalNews', intlNews);
 
   // 国内新闻
-  const chinaRSS = [
+  const chinaRSS=[
     "http://www.xinhuanet.com/rss/xinhuanet.xml",
     "http://www.gov.cn/rss/gov.xml",
     "http://www.qstheory.cn/rss/qs.xml"
   ];
-  let chinaNews = [];
-  for(const url of chinaRSS) {
-    try { chinaNews = chinaNews.concat(await fetchRSSJson(url)); } 
-    catch(e){ console.log('抓取失败:', e); }
-  }
+  let chinaNews=[];
+  for(const url of chinaRSS) chinaNews=chinaNews.concat(await fetchRSSJson(url));
   renderNews('chinaNews', chinaNews);
 
-  // 产业新闻
-  const industryRSS = [
+  // 产业新闻（工信部 + 江西省工信厅 + 九江市工信局）
+  const industryRSS=[
     "https://www.miit.gov.cn/rss/gzdt.xml",
     "https://jxgxt.jiangxi.gov.cn/rss/news.xml",
     "https://gxj.jiujiang.gov.cn/rss/news.xml"
   ];
-  let industryNews = [];
-  for(const url of industryRSS) {
-    try { industryNews = industryNews.concat(await fetchRSSJson(url)); } 
-    catch(e){ console.log('抓取失败:', e); }
-  }
+  let industryNews=[];
+  for(const url of industryRSS) industryNews=industryNews.concat(await fetchRSSJson(url));
   renderNews('industryNews', industryNews);
 }
 
-// 页面加载时抓取新闻
+// 初次加载
 loadAllNews();
 
-// 绑定刷新按钮
-document.getElementById('refreshBtn').addEventListener('click', () => {
-  document.getElementById('internationalNews').innerHTML = '正在加载...';
-  document.getElementById('chinaNews').innerHTML = '正在加载...';
-  document.getElementById('industryNews').innerHTML = '正在加载...';
+// 刷新按钮
+document.getElementById('refreshBtn').addEventListener('click', ()=>{
+  document.getElementById('internationalNews').innerHTML='正在加载...';
+  document.getElementById('chinaNews').innerHTML='正在加载...';
+  document.getElementById('industryNews').innerHTML='正在加载...';
   loadAllNews();
 });
 </script>
