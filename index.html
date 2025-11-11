@@ -1,165 +1,113 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NewsForMe - 国际·国内·产业资讯</title>
-<style>
-body {
-  font-family: "Microsoft YaHei", sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  color: #333;
-}
-header {
-  background-color: #1a73e8;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-  font-size: 1.5rem;
-}
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 20px auto;
-  gap: 20px;
-}
-.column {
-  flex: 1;
-  min-width: 350px;
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.column h2 {
-  border-bottom: 2px solid #1a73e8;
-  padding-bottom: 5px;
-}
-.news-item { margin-bottom: 10px; }
-.news-item a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
-.news-item a:hover { color: #1a73e8; }
-.chart-container {
-  width: 100%;
-  height: 300px;
-}
-footer {
-  text-align: center;
-  background-color: #1a73e8;
-  color: white;
-  padding: 15px;
-  margin-top: 20px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewsForMe 资讯中心</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1a73e8;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px;
+      gap: 20px;
+    }
+    .section {
+      flex: 1;
+      background-color: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      border-left: 5px solid #1a73e8;
+      padding-left: 10px;
+      color: #1a73e8;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    a:hover {
+      color: #1a73e8;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+  </style>
 </head>
 <body>
+  <header>NewsForMe 全球产业与政策资讯中心</header>
 
-<header>NewsForMe｜国际 · 国内 · 产业 要闻</header>
+  <div class="container">
+    <div class="section">
+      <h2>🌍 国际要闻</h2>
+      <ul>
+        <li><a href="https://edition.cnn.com" target="_blank">CNN：美国大选经济议题升温</a></li>
+        <li><a href="https://www.bbc.com" target="_blank">BBC：全球供应链紧张再度引发关注</a></li>
+        <li><a href="https://www.economist.com" target="_blank">The Economist：亚洲制造业正在复苏</a></li>
+      </ul>
 
-<div class="container">
-  <div class="column" id="international">
-    <h2>🌍 国际新闻</h2>
-    <div id="internationalNews"></div>
+      <h2>🇨🇳 国内要闻</h2>
+      <ul>
+        <li><a href="https://www.xinhuanet.com" target="_blank">新华社：我国前10月工业生产平稳增长</a></li>
+        <li><a href="https://www.gov.cn" target="_blank">中国政府网：国务院部署稳增长政策组合</a></li>
+        <li><a href="https://www.qstheory.cn" target="_blank">求是网：坚持高质量发展是首要任务</a></li>
+      </ul>
+
+      <h2>🏭 产业动态</h2>
+      <ul>
+        <li><a href="https://www.miit.gov.cn" target="_blank">工信部：制造业数字化转型成效显著</a></li>
+        <li><a href="https://gxj.jiangxi.gov.cn" target="_blank">江西省工信厅：区域动态与产业政策更新</a></li>
+        <li><a href="https://gxj.jiujiang.gov.cn" target="_blank">九江市工信局：重点项目稳步推进</a></li>
+      </ul>
+
+      <h2>📊 工业大宗商品价格（月度平均价，单位：美元/吨）</h2>
+      <table>
+        <tr><th>品种</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th></tr>
+        <tr><td>钢材</td><td>550</td><td>540</td><td>530</td><td>560</td><td>580</td></tr>
+        <tr><td>铜</td><td>8800</td><td>8600</td><td>8700</td><td>8900</td><td>9000</td></tr>
+        <tr><td>原油</td><td>76</td><td>82</td><td>79</td><td>85</td><td>87</td></tr>
+        <tr><td>煤炭</td><td>110</td><td>115</td><td>108</td><td>112</td><td>118</td></tr>
+      </table>
+    </div>
   </div>
-  <div class="column" id="china">
-    <h2>🇨🇳 国内新闻</h2>
-    <div id="chinaNews"></div>
-  </div>
-  <div class="column" id="industry">
-    <h2>🏭 产业新闻</h2>
-    <div id="industryNews"></div>
-  </div>
-</div>
 
-<div class="column" style="max-width:1200px;margin:20px auto;">
-  <h2>📈 工业大宗商品价格走势</h2>
-  <canvas id="commodityChart" class="chart-container"></canvas>
-</div>
-
-<footer>&copy; 2025 NewsForMe</footer>
-
-<!-- ✅ 使用 Compat SDK 版本（非模块化，可直接在浏览器使用） -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-// =================== Firebase 配置 ===================
-const firebaseConfig = {
-  apiKey: "AIzaSyBHWVtgAIQzi7gvJPEVVkqD9SV87jj4jrM",
-  authDomain: "newsforme-2d943.firebaseapp.com",
-  databaseURL: "https://newsforme-2d943-default-rtdb.firebaseio.com/",
-  projectId: "newsforme-2d943",
-  storageBucket: "newsforme-2d943.firebasestorage.app",
-  messagingSenderId: "379068097235",
-  appId: "1:379068097235:web:ccca3bc191c7d9fa1aaa26",
-  measurementId: "G-PGTVE7MMBP"
-};
-
-// 初始化 Firebase（兼容版）
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-console.log("✅ Firebase 初始化成功！");
-
-// =================== 测试新闻数据 ===================
-const testData = {
-  international: [
-    { title: "CNN: 全球热点追踪", summary: "最新国际局势综述。", link: "https://cnn.com" },
-    { title: "BBC: 今日头条", summary: "BBC 国际焦点新闻。", link: "https://bbc.com" }
-  ],
-  china: [
-    { title: "新华社: 政策动态", summary: "中央重要政策新闻。", link: "https://www.xinhuanet.com" },
-    { title: "中国政府网: 要闻速览", summary: "国务院最新信息。", link: "https://www.gov.cn" }
-  ],
-  industry: [
-    { title: "工信部: 行业发展", summary: "制造业新政发布。", link: "https://www.miit.gov.cn" },
-    { title: "江西省工信厅: 区域动态", summary: "地方产业政策解读。", link: "https://jxgxt.jiangxi.gov.cn" }
-  ]
-};
-
-// =================== 加载新闻函数 ===================
-function loadNews(containerId, data) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
-  data.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "news-item";
-    div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a><p>${item.summary}</p>`;
-    container.appendChild(div);
-  });
-}
-
-loadNews("internationalNews", testData.international);
-loadNews("chinaNews", testData.china);
-loadNews("industryNews", testData.industry);
-
-// =================== Chart.js 图表 ===================
-const ctx = document.getElementById('commodityChart').getContext('2d');
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: ['1月','2月','3月','4月','5月','6月'],
-    datasets: [{
-      label: '钢材价格指数',
-      data: [100, 120, 110, 130, 125, 140],
-      borderColor: 'rgba(26,115,232,1)',
-      backgroundColor: 'rgba(26,115,232,0.2)',
-      fill: true,
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false
-  }
-});
-</script>
-
+  <footer style="text-align:center;margin:20px 0;color:#666;">
+    © 2025 NewsForMe. Powered by Firebase.
+  </footer>
 </body>
 </html>
