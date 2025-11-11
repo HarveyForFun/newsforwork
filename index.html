@@ -1,177 +1,140 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NewsForMe 资讯中心</title>
-  <style>
-    body {
-      font-family: "Microsoft YaHei", sans-serif;
-      background-color: #f5f7fa;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #1a73e8;
-      color: white;
-      text-align: center;
-      padding: 20px 0;
-      font-size: 28px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      gap: 20px;
-    }
-    .section {
-      width: 90%;
-      background-color: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    h2 {
-      border-left: 5px solid #1a73e8;
-      padding-left: 10px;
-      color: #1a73e8;
-      margin-top: 0;
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0 0 15px 0;
-    }
-    li {
-      margin: 6px 0;
-    }
-    a {
-      text-decoration: none;
-      color: #333;
-    }
-    a:hover {
-      color: #1a73e8;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background-color: #f0f0f0;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NewsForMe 资讯门户</title>
+<style>
+body { font-family: "Microsoft YaHei", sans-serif; background-color: #f5f7fa; margin:0; color:#333; }
+header { background-color:#1a73e8; color:white; text-align:center; padding:20px 0; font-size:28px; font-weight:bold; letter-spacing:2px;}
+button { display:block; margin:10px auto; padding:10px 20px; font-size:14px; background:#1a73e8; color:white; border:none; border-radius:5px; cursor:pointer; }
+button:hover { background:#155ab6; }
+.layout { display:flex; max-width:1200px; margin:20px auto; gap:20px; }
+.left, .right { background:white; border-radius:12px; box-shadow:0 2px 5px rgba(0,0,0,0.1); padding:20px;}
+.left { flex:3; }
+.right { flex:2; }
+h2 { border-left:5px solid #1a73e8; padding-left:10px; color:#1a73e8; margin-top:0; }
+ul { list-style:none; padding-left:0; }
+li { margin:6px 0; }
+a { text-decoration:none; color:#333; }
+a:hover { color:#1a73e8; }
+table { width:100%; border-collapse:collapse; margin-top:10px; }
+th, td { border:1px solid #ccc; padding:8px; text-align:center; }
+th { background:#f0f0f0; }
+footer { text-align:center; margin:20px 0; color:#666; }
+</style>
 </head>
 <body>
-  <header>NewsForMe 全球产业与政策资讯中心</header>
 
-  <div class="container">
-    <div class="section">
-      <h2>🌍 国际要闻</h2>
-      <ul>
-        <li><strong>CNN</strong>
-          <ul>
-            <li><a href="https://edition.cnn.com/2025/11/11/politics/us-election-economy" target="_blank">美国大选经济议题升温</a></li>
-            <li><a href="https://edition.cnn.com/2025/11/11/business/global-oil-demand" target="_blank">全球原油需求回升推动油价上涨</a></li>
-            <li><a href="https://edition.cnn.com/2025/11/11/world/china-trade-outlook" target="_blank">中国出口结构转型引发关注</a></li>
-          </ul>
-        </li>
-        <li><strong>BBC</strong>
-          <ul>
-            <li><a href="https://www.bbc.com/news/business-676543" target="_blank">全球供应链紧张再度引发关注</a></li>
-            <li><a href="https://www.bbc.com/news/world-europe-676321" target="_blank">欧洲制造业出现温和回暖迹象</a></li>
-            <li><a href="https://www.bbc.com/news/world-asia-676111" target="_blank">日韩半导体政策引发区域竞争</a></li>
-          </ul>
-        </li>
-        <li><strong>The Economist</strong>
-          <ul>
-            <li><a href="https://www.economist.com/asia/2025/11/11/asian-manufacturing-recovery" target="_blank">亚洲制造业正在复苏</a></li>
-            <li><a href="https://www.economist.com/finance/2025/11/10/markets-react-to-us-policy" target="_blank">美国货币政策转向引发市场波动</a></li>
-            <li><a href="https://www.economist.com/business/2025/11/09/supply-chain-future" target="_blank">供应链全球化面临重新洗牌</a></li>
-          </ul>
-        </li>
-      </ul>
+<header>NewsForMe | 全球·国内·产业 要闻门户</header>
+<button id="refreshBtn">刷新新闻</button>
 
-      <h2>🇨🇳 国内要闻</h2>
-      <ul>
-        <li><strong>新华社</strong>
-          <ul>
-            <li><a href="https://www.xinhuanet.com/politics/2025-11/11/c_1123456.htm" target="_blank">我国前10月工业生产平稳增长</a></li>
-            <li><a href="https://www.xinhuanet.com/finance/2025-11/10/c_1123451.htm" target="_blank">人民币汇率保持基本稳定</a></li>
-            <li><a href="https://www.xinhuanet.com/local/2025-11/09/c_1123448.htm" target="_blank">各地稳投资促项目显成效</a></li>
-          </ul>
-        </li>
-        <li><strong>中国政府网</strong>
-          <ul>
-            <li><a href="https://www.gov.cn/zhengce/2025-11/11/content_6900001.htm" target="_blank">国务院部署稳增长政策组合</a></li>
-            <li><a href="https://www.gov.cn/xinwen/2025-11/10/content_6899982.htm" target="_blank">全国工业产值连续回升</a></li>
-            <li><a href="https://www.gov.cn/premier/2025-11/09/content_6899958.htm" target="_blank">李强主持召开国务院常务会议</a></li>
-          </ul>
-        </li>
-        <li><strong>求是网</strong>
-          <ul>
-            <li><a href="https://www.qstheory.cn/dukan/qs/2025-11/10/c_1123451.htm" target="_blank">坚持高质量发展是首要任务</a></li>
-            <li><a href="https://www.qstheory.cn/dukan/qs/2025-11/09/c_1123446.htm" target="_blank">推动新型工业化与绿色发展融合</a></li>
-            <li><a href="https://www.qstheory.cn/dukan/qs/2025-11/08/c_1123442.htm" target="_blank">完善现代化产业体系的关键环节</a></li>
-          </ul>
-        </li>
-      </ul>
+<div class="layout">
+  <div class="left">
+    <h2>🌍 国际新闻</h2>
+    <div id="internationalNews">正在加载...</div>
 
-      <h2>🏭 产业动态</h2>
-      <ul>
-        <li><strong>工信部</strong>
-          <ul>
-            <li><a href="https://www.miit.gov.cn/gzdt/gzdt/2025-11/11/content_6900215.htm" target="_blank">制造业数字化转型成效显著</a></li>
-            <li><a href="https://www.miit.gov.cn/gzdt/gzdt/2025-11/10/content_6900198.htm" target="_blank">中小企业创新能力持续增强</a></li>
-            <li><a href="https://www.miit.gov.cn/gzdt/gzdt/2025-11/09/content_6900182.htm" target="_blank">工业绿色低碳转型深入推进</a></li>
-          </ul>
-        </li>
-        <li><strong>江西省工信厅</strong>
-          <ul>
-            <li><a href="https://gxj.jiangxi.gov.cn/art/2025/11/11/art_10989_1052872.html" target="_blank">江西召开新型工业化推进会</a></li>
-            <li><a href="https://gxj.jiangxi.gov.cn/art/2025/11/10/art_10989_1052871.html" target="_blank">电子信息产业发展势头良好</a></li>
-            <li><a href="https://gxj.jiangxi.gov.cn/art/2025/11/09/art_10989_1052870.html" target="_blank">政策助力企业技改升级</a></li>
-          </ul>
-        </li>
-        <li><strong>九江市工信局</strong>
-          <ul>
-            <li><a href="https://gxj.jiujiang.gov.cn/art/2025/11/11/art_12345_1021012.html" target="_blank">九江重点项目稳步推进</a></li>
-            <li><a href="https://gxj.jiujiang.gov.cn/art/2025/11/10/art_12345_1021011.html" target="_blank">产业集群建设提速提质</a></li>
-            <li><a href="https://gxj.jiujiang.gov.cn/art/2025/11/09/art_12345_1021010.html" target="_blank">专精特新企业再获政策支持</a></li>
-          </ul>
-        </li>
-      </ul>
-
-      <h2>📊 工业大宗商品价格走势（美元/吨）</h2>
-      <table>
-        <tr>
-          <th>品种</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>同比增长(%)</th>
-        </tr>
-        <tr><td>钢材</td><td>520</td><td>530</td><td>540</td><td>550</td><td>560</td><td>575</td><td>+4.5</td></tr>
-        <tr><td>铜</td><td>8600</td><td>8700</td><td>8800</td><td>8900</td><td>9050</td><td>9150</td><td>+3.8</td></tr>
-        <tr><td>铝</td><td>2200</td><td>2250</td><td>2300</td><td>2350</td><td>2380</td><td>2400</td><td>+2.7</td></tr>
-        <tr><td>原油</td><td>78</td><td>80</td><td>82</td><td>83</td><td>85</td><td>87</td><td>+5.0</td></tr>
-        <tr><td>煤炭</td><td>108</td><td>110</td><td>112</td><td>115</td><td>117</td><td>119</td><td>+3.5</td></tr>
-        <tr><td>有机硅</td><td>2200</td><td>2250</td><td>2320</td><td>2380</td><td>2400</td><td>2450</td><td>+6.1</td></tr>
-        <tr><td>锂</td><td>13500</td><td>13700</td><td>13850</td><td>13900</td><td>14100</td><td>14250</td><td>+2.9</td></tr>
-        <tr><td>稀土</td><td>64000</td><td>64500</td><td>64800</td><td>65200</td><td>65500</td><td>66000</td><td>+3.1</td></tr>
-        <tr><td>PVC</td><td>900</td><td>920</td><td>940</td><td>960</td><td>970</td><td>980</td><td>+2.5</td></tr>
-        <tr><td>水泥</td><td>70</td><td>72</td><td>73</td><td>74</td><td>76</td><td>77</td><td>+2.1</td></tr>
-      </table>
-    </div>
+    <h2>🇨🇳 国内新闻</h2>
+    <div id="chinaNews">正在加载...</div>
   </div>
 
-  <footer style="text-align:center;margin:20px 0;color:#666;">
-    © 2025 NewsForMe. Powered by Firebase.
-  </footer>
+  <div class="right">
+    <h2>🏭 产业新闻</h2>
+    <div id="industryNews">正在加载...</div>
+
+    <h2>📊 工业大宗商品价格（近6月及同比增长）</h2>
+    <table>
+      <tr>
+        <th>品种</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>同比增长(%)</th>
+      </tr>
+      <tr><td>钢材</td><td>520</td><td>530</td><td>540</td><td>550</td><td>560</td><td>575</td><td>+4.5</td></tr>
+      <tr><td>铜</td><td>8600</td><td>8700</td><td>8800</td><td>8900</td><td>9050</td><td>9150</td><td>+3.8</td></tr>
+      <tr><td>铝</td><td>2200</td><td>2250</td><td>2300</td><td>2350</td><td>2380</td><td>2400</td><td>+2.7</td></tr>
+      <tr><td>原油</td><td>78</td><td>80</td><td>82</td><td>83</td><td>85</td><td>87</td><td>+5.0</td></tr>
+      <tr><td>煤炭</td><td>108</td><td>110</td><td>112</td><td>115</td><td>117</td><td>119</td><td>+3.5</td></tr>
+      <tr><td>有机硅</td><td>2200</td><td>2250</td><td>2320</td><td>2380</td><td>2400</td><td>2450</td><td>+6.1</td></tr>
+      <tr><td>锂</td><td>13500</td><td>13700</td><td>13850</td><td>13900</td><td>14100</td><td>14250</td><td>+2.9</td></tr>
+      <tr><td>稀土</td><td>64000</td><td>64500</td><td>64800</td><td>65200</td><td>65500</td><td>66000</td><td>+3.1</td></tr>
+      <tr><td>PVC</td><td>900</td><td>920</td><td>940</td><td>960</td><td>970</td><td>980</td><td>+2.5</td></tr>
+      <tr><td>水泥</td><td>70</td><td>72</td><td>73</td><td>74</td><td>76</td><td>77</td><td>+2.1</td></tr>
+    </table>
+  </div>
+</div>
+
+<footer>© 2025 NewsForMe. 版权所有</footer>
+
+<script>
+async function fetchRSSJson(rssUrl) {
+  const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+  const res = await fetch(api);
+  const data = await res.json();
+  return data.items.slice(0,3); // 最新3条
+}
+
+function renderNews(containerId, items) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>
+                     <span style="color:#999;font-size:12px"> (${item.pubDate ? new Date(item.pubDate).toLocaleDateString() : ''})</span>
+                     <p style="color:#666;font-size:13px">${item.description || item.contentSnippet || ''}</p>`;
+    container.appendChild(div);
+  });
+}
+
+async function loadAllNews() {
+  // 国际新闻
+  const intlRSS = [
+    "https://rss.cnn.com/rss/cnn_topstories.rss",
+    "http://feeds.bbci.co.uk/news/rss.xml",
+    "https://www.economist.com/sections/international/rss.xml"
+  ];
+  let intlNews = [];
+  for(const url of intlRSS) {
+    try { intlNews = intlNews.concat(await fetchRSSJson(url)); } 
+    catch(e){ console.log('抓取失败:', e); }
+  }
+  renderNews('internationalNews', intlNews);
+
+  // 国内新闻
+  const chinaRSS = [
+    "http://www.xinhuanet.com/rss/xinhuanet.xml",
+    "http://www.gov.cn/rss/gov.xml",
+    "http://www.qstheory.cn/rss/qs.xml"
+  ];
+  let chinaNews = [];
+  for(const url of chinaRSS) {
+    try { chinaNews = chinaNews.concat(await fetchRSSJson(url)); } 
+    catch(e){ console.log('抓取失败:', e); }
+  }
+  renderNews('chinaNews', chinaNews);
+
+  // 产业新闻
+  const industryRSS = [
+    "https://www.miit.gov.cn/rss/gzdt.xml",
+    "https://jxgxt.jiangxi.gov.cn/rss/news.xml",
+    "https://gxj.jiujiang.gov.cn/rss/news.xml"
+  ];
+  let industryNews = [];
+  for(const url of industryRSS) {
+    try { industryNews = industryNews.concat(await fetchRSSJson(url)); } 
+    catch(e){ console.log('抓取失败:', e); }
+  }
+  renderNews('industryNews', industryNews);
+}
+
+// 页面加载时抓取新闻
+loadAllNews();
+
+// 绑定刷新按钮
+document.getElementById('refreshBtn').addEventListener('click', () => {
+  document.getElementById('internationalNews').innerHTML = '正在加载...';
+  document.getElementById('chinaNews').innerHTML = '正在加载...';
+  document.getElementById('industryNews').innerHTML = '正在加载...';
+  loadAllNews();
+});
+</script>
+
 </body>
 </html>
